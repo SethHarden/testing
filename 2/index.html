@@ -66,10 +66,16 @@
       // Multiply the fraction by the number of steps (equal to the number of images) and floor the result.
       let index = Math.floor(scrollFraction * 2 * rocketImages.length);
       // Clamp index in case of overshooting.
-      if (index >= rocketImages.length) index = rocketImages.length - 1;
-      if (index == 0) index = 1;
-      // Update the rocket image source.
+     // if (index >= rocketImages.length) index = rocketImages.length - 1;
+   
+      if (index > 0 || number < 4) {
+   index = rocketImages.length - 1;
+         // Update the rocket image source.
       rocketElement.src = rocketImages[index];
+  } else {
+   
+  }
+     
     });
   </script>
 </body>

@@ -60,7 +60,8 @@
       // Calculate how far the user has scrolled relative to the maximum scrollable height.
       const scrollPos = window.scrollY;
       const maxScroll = document.body.scrollHeight - window.innerHeight;
-      const scrollFraction = (scrollPos / maxScroll) * 2;
+      const scrollFraction = scrollPos / maxScroll;
+      console.log ("Pos " + scrollPos + " Max " + maxScroll);
 
       // Determine which rocket image to show.
       // Multiply the fraction by the number of steps (equal to the number of images) and floor the result.

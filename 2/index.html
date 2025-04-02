@@ -1,1 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Parallax Rocket</title>
+  <style>
+    /* Basic Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 200vh; /* Extra height to allow scrolling */
+      font-family: Arial, sans-serif;
+    }
+    /* Parallax Container */
+    .parallax {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+    }
+    /* Background Layer */
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: url('outer-space.jpg') center/cover no-repeat;
+      z-index: 1;
+    }
+    /* Rocket (Front Layer) */
+    .rocket {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 200px; /* Adjust as needed */
+      transform: translate(-50%, -20%);
+      z-index: 2;
+      
+    }
+  </style>
+</head>
+<body>
+  <!-- Parallax Section -->
+  <div class="parallax">
+    <div class="background"></div>
+    <img id="rocket" class="rocket" src="rocket1.png" alt="Rocket" />
+  </div>
 
+  <!-- JavaScript to Change Rocket Image on Scroll -->
+  <script>
+    // Array of rocket images.
+    const rocketImages = ['rocket1.png', 'rocket2.png', 'rocket3.png', 'rocket4.png'];
+    const rocketElement = document.getElementById('rocket');
+
+    window.addEventListener('scroll', () => {
+      // Calculate how far the user has scrolled relative to the maximum scrollable height.
+      const scrollPos = window.scrollY;
+      const maxScroll = document.body.scrollHeight - window.innerHeight;
+      const scrollFraction = scrollPos / maxScroll;
+
+      // Determine which rocket image to show.
+      // Multiply the fraction by the number of steps (equal to the number of images) and floor the result.
+      let index = Math.floor(scrollFraction * 2 * rocketImages.length);
+      // Clamp index in case of overshooting.
+      if (index >= rocketImages.length) index = rocketImages.length - 1;
+      
+      // Update the rocket image source.
+      rocketElement.src = rocketImages[index];
+    });
+  </script>
+</body>
+</html>

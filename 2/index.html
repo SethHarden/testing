@@ -59,7 +59,7 @@
     window.addEventListener('scroll', () => {
       // Calculate how far the user has scrolled relative to the maximum scrollable height.
       const scrollPos = window.scrollY;
-      const maxScroll = document.body.scrollHeight - window.innerHeight;
+      const maxScroll = (document.body.scrollHeight - window.innerHeight) * 0.8;
       const scrollFraction = scrollPos / maxScroll;
       console.log ("Pos " + scrollPos + " Max " + maxScroll);
 
@@ -67,20 +67,10 @@
       // Multiply the fraction by the number of steps (equal to the number of images) and floor the result.
       let index = Math.floor(scrollFraction * rocketImages.length);
       // Clamp index in case of overshooting.
-     // if (index >= rocketImages.length) index = rocketImages.length - 1;
+     if (index >= rocketImages.length) index = rocketImages.length - 1;
    
-      if (index >= 0 || number <= 3) {
-   index = rocketImages.length - 1;
-         // Update the rocket image source.
       rocketElement.src = rocketImages[index];
-        console.log(index);
-        
-  } else {
-    index = rocketImages.length + 1;
-         // Update the rocket image source.
-      rocketElement.src = rocketImages[index];
-        console.log(index);
-  }
+   
      
     });
   </script>

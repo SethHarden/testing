@@ -47,7 +47,7 @@
   <!-- Parallax Section -->
   <div class="parallax">
     <div class="background"></div>
-    <img id="rocket" class="rocket" src="rocket1.png" alt="final"/>
+    <img id="rocket" class="rocket" src="rocket1.png" alt="finalxcxcxcccc"/>
   </div>
 
   <!-- JavaScript to Change Rocket Image on Scroll -->
@@ -59,7 +59,7 @@
     window.addEventListener('scroll', () => {
       // Calculate how far the user has scrolled relative to the maximum scrollable height.
       const scrollPos = window.scrollY;
-      const maxScroll = (document.body.scrollHeight - window.innerHeight) - 200;
+      const maxScroll = (document.body.scrollHeight - window.innerHeight) * 0.5;
       const scrollFraction = scrollPos / maxScroll;
       console.log ("Pos " + scrollPos + " Max " + maxScroll);
 

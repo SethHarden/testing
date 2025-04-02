@@ -67,7 +67,7 @@
       let index = Math.floor(scrollFraction * rocketImages.length);
       // Clamp index in case of overshooting.
       if (index >= rocketImages.length) index = rocketImages.length - 1;
-      
+      if (index < 0) index = rocketImages.length + 1;
       // Update the rocket image source.
       rocketElement.src = rocketImages[index];
     });

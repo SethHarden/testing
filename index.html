@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Seth Harden Mediaaaa</title>
+  <title>Seth Harden Media</title>
   <style>
     /* Basic Reset */
     * {
@@ -45,25 +45,30 @@
       left: 0;
       right: 0;
       bottom: 0;
-      transform-origin: 0;
+      
     }
     /* Background layer (outer-space) */
     .parallax__layer--back {
       transform: translateZ(-1px) scale(2);
       background: url('outer-space.jpg') center/cover no-repeat;
+      background-size: 400%;
       z-index: 1;
     }
     /* Middle layer (rocket) */
     .parallax__layer--rocket {
       transform: translateZ(0.2px) scale(0.9);
       background: url('rocket.png') center/contain no-repeat;
+      background-size: 50%;
       z-index: 2;
       pointer-events: none;
+      background-position-y: 30%;
+
     }
     /* Foreground layer (astronaut) */
     .parallax__layer--fore {
       transform: translateZ(0.5px) scale(0.8);
       background: url('astronaut.png') center/contain no-repeat;
+      background-size: 25%;
       z-index: 3;
       pointer-events: none;
     }
@@ -116,7 +121,6 @@
   </style>
 </head>
 <body>
-  safdasfasfdafd
   <!-- Fixed Navigation -->
   <nav>
     <h1>Seth Harden Media</h1>

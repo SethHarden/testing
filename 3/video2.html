@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Scroll-Controlled Video</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      overflow-x: hidden;
+    }
+
+    #video-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    #bg-video {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      z-index: 10;
+    }
+
+    .navbar img {
+      height: 40px;
+    }
+
+    .section-video {
+      height: 100vh;
+      position: relative;
+      z-index: 1;
+      padding-top: 60px;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .section-bg {
+     margin-top: 50vh;
+      height: 100vh;
+      background-color: #000000;
+      background: url('background.jpg') center center / cover no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="video-container">
+    <video id="bg-video" src="video.mp4" muted playsinline></video>
+  </div>
+
+  <div class="navbar">
+    <img src="logo.png" alt="Logo">
+  </div>
+
+  <div class="section-video">
+    <div>
+      <h1>Scroll to Control Video</h1>
+      <p>Scroll down to play forward, scroll up to play backward.</p>
+    </div>
+  </div>
+
+  <div class="section-bg">
+    <p>This is the next section after the video.</p>
+  </div>
+
+  <script>
+    const video = document.getElementById('bg-video');
+    const videoSection = document.querySelector('.section-video');
+    let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    let scrollSpeed = 0.05;
+
+    video.addEventListener('loadedmetadata', () => {
+      window.addEventListener('scroll', () => {
+        const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const direction = currentScrollTop > lastScrollTop ? 1 : -1;
+
+        const scrollLimit = videoSection.offsetHeight;
+        if (window.scrollY < scrollLimit) {
+          // Scroll-controlled video playback
+          video.currentTime = Math.max(0, Math.min(video.duration, video.currentTime + direction * scrollSpeed));
+        }
+
+        lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
+      });
+    });
+  </script>
+
+</body>
+</html>

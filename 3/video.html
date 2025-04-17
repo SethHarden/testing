@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Scroll-Controlled Video</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 200vh;
+      overflow-y: scroll;
+      font-family: sans-serif;
+    }
+
+    #video-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    #bg-video {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      z-index: 10;
+    }
+
+    .navbar img {
+      height: 40px;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      padding: 80px 20px 20px; /* Top padding to avoid overlap with navbar */
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="video-container">
+    <video id="bg-video" src="video.mp4" muted loop playsinline></video>
+  </div>
+
+  <div class="navbar">
+    <img src="logo.png" alt="Logo">
+  </div>
+
+  <div class="content">
+    <h1>Scroll to Control Video</h1>
+    <p>Scroll down to play forward, scroll up to play backward.</p>
+  </div>
+
+  <script>
+    const video = document.getElementById('bg-video');
+    let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    let scrollSpeed = 0.05;
+
+    video.addEventListener('loadedmetadata', () => {
+      window.addEventListener('scroll', () => {
+        const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const direction = currentScrollTop > lastScrollTop ? 1 : -1;
+
+        video.currentTime = Math.max(0, Math.min(video.duration, video.currentTime + direction * scrollSpeed));
+        lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
+      });
+    });
+  </script>
+
+</body>
+</html>
